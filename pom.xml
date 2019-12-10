@@ -13,6 +13,7 @@
         <module>internet</module>
         <!--<module>springboot-transication</module>-->
         <module>springboot-data-access</module>
+        <module>springboot-elasticsearch</module>
     </modules>
     <packaging>pom</packaging>
 
