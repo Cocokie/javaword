@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>javaworld</artifactId>
+        <groupId>com.lix.java</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.lix.java</groupId>
+    <artifactId>springboot-data-access</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>mysql-config-mybatis</module>
+        <module>mysql-simple-mybatis</module>
+        <module>mysql-jpa</module>
+        <module>mysql-tkmapper-mybatis</module>
+    </modules>
+
+</project>

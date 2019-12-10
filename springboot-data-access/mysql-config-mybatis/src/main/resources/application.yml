@@ -1,0 +1,6 @@
+logging:
+ level:
+    com.lix: debug
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.lix.domain
