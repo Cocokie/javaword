@@ -2,14 +2,18 @@ package com.lix.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
+import java.util.List;
+
 @Data
 @Document(indexName = "item",type = "docs", shards = 1, replicas = 0)
 @AllArgsConstructor
+@NoArgsConstructor
 public class Item {
     @Id
     private Long id;

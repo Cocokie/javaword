@@ -14,6 +14,13 @@
         <!--<module>springboot-transication</module>-->
         <module>springboot-data-access</module>
         <module>springboot-elasticsearch</module>
+        <module>zookeeper</module>
+        <module>thread</module>
+        <module>springboot-request-httpclient</module>
+        <module>httpclient-springboot</module>
+        <module>redis</module>
+        <module>json</module>
+        <module>springboot-redis</module>
     </modules>
     <packaging>pom</packaging>
 

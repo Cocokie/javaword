@@ -1,5 +1,8 @@
 spring:
   data:
     elasticsearch:
-      cluster-name: sd
+      cluster-name: my-application
       cluster-nodes: localhost:9300
+logging:
+  level:
+    com.lix: debug
