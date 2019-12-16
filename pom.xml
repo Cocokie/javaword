@@ -21,6 +21,7 @@
         <module>redis</module>
         <module>json</module>
         <module>springboot-redis</module>
+        <module>all-customize</module>
     </modules>
     <packaging>pom</packaging>
 
