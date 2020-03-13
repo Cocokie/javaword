@@ -22,6 +22,11 @@
         <module>json</module>
         <module>springboot-redis</module>
         <module>all-customize</module>
+        <module>weixin</module>
+        <module>springboot-interceptor</module>
+        <module>secret</module>
+        <module>stream-io</module>
+        <module>basic-java</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -10,6 +10,7 @@ import java.net.URL;
 public class SimpleCrawler {
     //还需要关注HttpURLConnection
     public static void main(String[] args) {
+
         URL url = null;
         InputStream is = null;
         BufferedReader br = null;
@@ -24,9 +25,10 @@ public class SimpleCrawler {
              * 然后进行数据分析，建立索引。这也是搜索引擎的第一步。
              */
             while ((temp = br.readLine()) != null) {
+                System.out.println(temp);
                 sb.append(temp);
             }
-            System.out.println(sb);
+           // System.out.println(sb);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {

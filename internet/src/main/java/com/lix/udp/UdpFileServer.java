@@ -9,6 +9,7 @@ import java.net.SocketException;
 
 //udp本来是不分服务端和客户端的，一般都是互相自由通信
 //此测试就当此类为接收端
+//尝试各种 不是字符串的 转字节数组  如 long基本类型 图片 对象
 public class UdpFileServer {
    //1.使用DatagramSocket 指定端口，创建接收端
    //2.准备容器用来装发送的数据，  封装成DatagramPacket来装数据
@@ -27,7 +28,7 @@ public class UdpFileServer {
         ByteArrayInputStream bis = new ByteArrayInputStream(dp.getData());
         DataInputStream dis = new DataInputStream(bis);
         System.out.println(dis.readLong());
-        FileReader
+
         //关闭资源
         dis.close();
         bis.close();

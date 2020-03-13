@@ -3,6 +3,8 @@ package com.lix;
 import com.lix.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 
@@ -15,31 +17,34 @@ import java.util.concurrent.TimeUnit;
 public class Test {
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
-
+    @Autowired
+    JedisConnectionFactory jedisConnectionFactory;
     @org.junit.jupiter.api.Test
     public void test() {
         redisString();
         //redisList();
         //setRedis();
         //zsetRedis();
-        //hashRedis();
+        // hashRedis();
 
     }
 
     private void hashRedis() {
-//        User u = new User("lixin","18");
-//        redisTemplate.boundHashOps("users").put("lixin",u);
-//        redisTemplate.boundHashOps("hash").put("1", "a");
-//        redisTemplate.boundHashOps("hash").put("2", "b");
-//        redisTemplate.boundHashOps("hash").put("3", "c");
-//        redisTemplate.boundHashOps("hash").put("4", "d");
-//
-//        List hash = redisTemplate.boundHashOps("hash").values();
-//        System.out.println(hash);
-//
-//        Set set = redisTemplate.boundHashOps("hash").keys();
-//        System.out.println(set);
-//
+        User u = new User("xixi", "18");
+        User u1 = new User("haha", "18");
+        redisTemplate.boundHashOps("users").put("lixin", u);
+        redisTemplate.boundHashOps("users").put("haha", u1);
+        redisTemplate.boundHashOps("hash").put("1", "a");
+        redisTemplate.boundHashOps("hash").put("2", "b");
+        redisTemplate.boundHashOps("hash").put("3", "c");
+        redisTemplate.boundHashOps("hash").put("4", "d");
+
+        List hash = redisTemplate.boundHashOps("hash").values();
+        System.out.println(hash);
+
+        Set set = redisTemplate.boundHashOps("hash").keys();
+        System.out.println(set);
+
         User o = (User) redisTemplate.boundHashOps("users").get("lixin");
         System.out.println(o);
     }
@@ -92,13 +97,13 @@ public class Test {
     }
 
     private void redisString() {
-        redisTemplate.opsForValue().setIfAbsent("test","xxx");
+        redisTemplate.opsForValue().setIfAbsent("ti1", "xxx");
         try {
             TimeUnit.SECONDS.sleep(10);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        redisTemplate.opsForValue().set("test","113");
+        redisTemplate.opsForValue().set("test", "113");
 //        Boolean aBoolean = redisTemplate.opsForValue().setIfAbsent("redisx", "sd", 60, TimeUnit.SECONDS);
 //        System.out.println(aBoolean);
 //        System.out.println(redisTemplate.;

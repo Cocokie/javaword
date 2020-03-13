@@ -14,11 +14,6 @@ public class SocketIp {
         InetSocketAddress socketAddress2 = new InetSocketAddress("localhost", 9000);
         System.out.println(socketAddress.getHostName());
         System.out.println(socketAddress2.getAddress());
-        File f = new File("E:/images");
-        URL url = f.toURI().toURL();
-        System.out.println(url.getPort());
-        System.out.println(url.getFile());
-        System.out.println(url.getProtocol());
-        System.out.println(url);
+
     }
 }

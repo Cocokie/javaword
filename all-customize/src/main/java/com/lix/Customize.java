@@ -2,12 +2,15 @@ package com.lix;
 
 import com.lix.domain.Dish;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Customize {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         List<Dish> menu = Arrays.asList(
                 new Dish("pork", 200),
                 new Dish("xxx", 122),

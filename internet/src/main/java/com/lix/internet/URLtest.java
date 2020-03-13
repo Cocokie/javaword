@@ -1,5 +1,6 @@
 package com.lix.internet;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -19,5 +20,12 @@ public class URLtest {
         URL u1 = new URL("http://www.abc.com/aa/");
         URL u2 = new URL(u, "2.html"); // 相对路径构建url对象
         System.out.println(u2.toString()); // http://www.abc.com/aa/2.html
+
+        File f = new File("E:/images");
+        URL url = f.toURI().toURL();
+        System.out.println(url.getPort());
+        System.out.println(url.getFile());
+        System.out.println(url.getProtocol());
+        System.out.println(url);
     }
 }

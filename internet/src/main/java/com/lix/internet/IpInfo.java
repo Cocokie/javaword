@@ -6,8 +6,8 @@ import java.net.UnknownHostException;
 public class IpInfo {
     public static void main(String[] args) throws UnknownHostException {
 
-       // getLocalInfo();
-        //getInfoByName();
+        //getLocalInfo();
+       // getInfoByName();
         getInfoByIp();
     }
 
@@ -36,5 +36,6 @@ public class IpInfo {
         System.out.println(addr.getHostAddress());
         //输出计算机名：
         System.out.println(addr.getHostName());
+
     }
 }
