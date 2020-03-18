@@ -3,6 +3,7 @@ package com.lix.xmlparams;
 import com.lix.XmlInfoConstant;
 import com.lix.xmlcontainer.ServletClass;
 import com.lix.xmlcontainer.ServletMapping;
+import com.lix.xmlcontainer.WebApp;
 import com.lix.xmlcontainer.XmlInfo;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -26,12 +27,19 @@ import java.util.Map;
 public class WebXmlOperate implements XmlParse {
     private List<Map<String, Object>> xmlObjects;
 
+    public static void main(String[] args) {
+        new WebXmlOperate().parseXml("myWeb.xml");
+    }
+
     public List<Map<String, List<Object>>> parseXml(String resource) {
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
             WebXmlParseHandler webXmlParseHandler = new WebXmlParseHandler();
             saxParser.parse(Thread.currentThread().getContextClassLoader().getResourceAsStream(resource), webXmlParseHandler);
+            WebApp webApp = webXmlParseHandler.getWebApp();
+            System.out.println(webApp);
+            System.out.println("======解析完毕======");
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (SAXException e) {
@@ -48,62 +56,84 @@ public class WebXmlOperate implements XmlParse {
 }
 
 class WebXmlParseHandler extends DefaultHandler {
-    private List<Map<String, List<XmlInfo>>> xmlInfo;
     private ServletClass servletClass;
     private ServletMapping servletMapping;
-    private Map<String, List<XmlInfo>> map;
+    private WebApp webApp;
     private String currentTag;
-    private List<XmlInfo> xmlInfos;
+    private XmlInfo currentClass;
+
+    private List<ServletClass> servletClassList;
+    private List<ServletMapping> servletMappingList;
+
+    private List<String> urlPatterns;
 
     @Override
     public void startDocument() throws SAXException {
         System.out.println("开始解析webXml");
-        xmlInfo = new ArrayList<Map<String, List<XmlInfo>>>();
-        map = new HashMap<String, List<XmlInfo>>();
-        xmlInfos = new ArrayList<XmlInfo>();
+
+
+        currentClass = new XmlInfo();
+        servletClassList = new ArrayList<ServletClass>();
+        servletMappingList = new ArrayList<ServletMapping>();
+
+        webApp = new WebApp();
+        urlPatterns = new ArrayList<String>();
+
     }
 
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         System.out.println("开始解析元素");
+
         this.currentTag = qName;
-        if (qName != null && qName.equals(XmlInfoConstant.SERVLET)) {
+        if (qName != null && qName.equals(XmlInfoConstant.SERVLET.getName())) {
             servletClass = new ServletClass();
-            xmlInfos.add(servletClass);
-        } else if (qName != null && qName.equals(XmlInfoConstant.SERVLETMAPPING)) {
+            currentClass = servletClass;
+        } else if (qName != null && qName.equals(XmlInfoConstant.SERVLETMAPPING.getName())) {
             servletMapping = new ServletMapping();
-            xmlInfos.add(servletMapping);
+            servletMapping.setUrlPatterns(urlPatterns);
+            currentClass = servletMapping;
         }
     }
 
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         System.out.println("解析元素内容");
-        String s = new String(ch, start, length);
-        XmlInfo xmlInfo = xmlInfos.get(xmlInfos.size() - 1);
-        if (xmlInfo instanceof ServletClass) {
-            ServletClass xmlInfo1 = (ServletClass) xmlInfo;
-            if (currentTag.equals(XmlInfoConstant.SERVLETNAME)) {
-                xmlInfo1.setServletName(s);
-            } else if (currentTag.equals(XmlInfoConstant.SERVLETCLASS)) {
-                xmlInfo1.setServletClass(s);
+        String s = new String(ch, start, length).trim();
+
+
+        if (servletClass != null && currentTag != null) {
+
+            if (currentTag.equals(XmlInfoConstant.SERVLETNAME.getName())) {
+                servletClass.setServletName(s);
+            } else if (currentTag.equals(XmlInfoConstant.SERVLETCLASS.getName())) {
+                servletClass.setServletClass(s);
             }
 
-        } else if (xmlInfo instanceof ServletMapping) {
-            ServletMapping xmlInfo1 = (ServletMapping) xmlInfo;
-            if (currentTag.equals(XmlInfoConstant.SERVLETNAME)) {
-                xmlInfo1.setServletName(s);
-            } else if (currentTag.equals(XmlInfoConstant.URLPATTERN)) {
-                xmlInfo1.setUrlPatterns(null);
+        } else if (servletMapping != null && currentTag != null) {
+            if (currentTag.equals(XmlInfoConstant.SERVLETNAME.getName())) {
+                servletMapping.setServletName(s);
+            } else if (currentTag.equals(XmlInfoConstant.URLPATTERN.getName())) {
+                urlPatterns.add(s);
             }
         }
-        super.characters(ch, start, length);
     }
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
         System.out.println("解析元素结束");
+        currentTag = null;
+        if (qName != null && qName.equals(XmlInfoConstant.WEBAPP.getName())) {
+            webApp.setServletClasses(servletClassList);
+            webApp.setServletMappings(servletMappingList);
+        } else if (qName != null && qName.equals(XmlInfoConstant.SERVLET.getName())) {
+            servletClassList.add(servletClass);
+            servletClass = null;
+        } else if (qName != null && qName.equals(XmlInfoConstant.SERVLETMAPPING.getName())) {
+            servletMappingList.add(servletMapping);
+            servletMapping = null;
+        }
         super.endElement(uri, localName, qName);
     }
 
@@ -114,4 +144,7 @@ class WebXmlParseHandler extends DefaultHandler {
 
     }
 
+    public WebApp getWebApp() {
+        return webApp;
+    }
 }

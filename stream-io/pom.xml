@@ -9,7 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.lix.java</groupId>
     <artifactId>stream-io</artifactId>
+
+
     <build>
         <plugins>
             <plugin>

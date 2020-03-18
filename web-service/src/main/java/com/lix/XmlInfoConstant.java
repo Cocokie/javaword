@@ -14,6 +14,7 @@ public enum XmlInfoConstant {
     SERVLETMAPPING("servlet-mapping"),
     SERVLETNAME("servlet-name"),
     SERVLETCLASS("servlet-class"),
-    URLPATTERN("url-pattern");;
+    URLPATTERN("url-pattern"),
+    WEBAPP("web-app");
     private String name;
 }

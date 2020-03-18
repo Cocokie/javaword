@@ -28,6 +28,9 @@
         <module>stream-io</module>
         <module>basic-java</module>
         <module>web-service</module>
+        <module>java8</module>
+        <module>basic-java</module>
+        <module>stream-io</module>
     </modules>
     <packaging>pom</packaging>
 
