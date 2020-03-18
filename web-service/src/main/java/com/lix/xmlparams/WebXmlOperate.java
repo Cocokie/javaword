@@ -53,12 +53,14 @@ class WebXmlParseHandler extends DefaultHandler {
     private ServletMapping servletMapping;
     private Map<String, List<XmlInfo>> map;
     private String currentTag;
+    private List<XmlInfo> xmlInfos;
 
     @Override
     public void startDocument() throws SAXException {
         System.out.println("开始解析webXml");
         xmlInfo = new ArrayList<Map<String, List<XmlInfo>>>();
         map = new HashMap<String, List<XmlInfo>>();
+        xmlInfos = new ArrayList<XmlInfo>();
     }
 
 
@@ -68,14 +70,34 @@ class WebXmlParseHandler extends DefaultHandler {
         this.currentTag = qName;
         if (qName != null && qName.equals(XmlInfoConstant.SERVLET)) {
             servletClass = new ServletClass();
+            xmlInfos.add(servletClass);
         } else if (qName != null && qName.equals(XmlInfoConstant.SERVLETMAPPING)) {
             servletMapping = new ServletMapping();
+            xmlInfos.add(servletMapping);
         }
     }
 
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         System.out.println("解析元素内容");
+        String s = new String(ch, start, length);
+        XmlInfo xmlInfo = xmlInfos.get(xmlInfos.size() - 1);
+        if (xmlInfo instanceof ServletClass) {
+            ServletClass xmlInfo1 = (ServletClass) xmlInfo;
+            if (currentTag.equals(XmlInfoConstant.SERVLETNAME)) {
+                xmlInfo1.setServletName(s);
+            } else if (currentTag.equals(XmlInfoConstant.SERVLETCLASS)) {
+                xmlInfo1.setServletClass(s);
+            }
+
+        } else if (xmlInfo instanceof ServletMapping) {
+            ServletMapping xmlInfo1 = (ServletMapping) xmlInfo;
+            if (currentTag.equals(XmlInfoConstant.SERVLETNAME)) {
+                xmlInfo1.setServletName(s);
+            } else if (currentTag.equals(XmlInfoConstant.URLPATTERN)) {
+                xmlInfo1.setUrlPatterns(null);
+            }
+        }
         super.characters(ch, start, length);
     }
 
