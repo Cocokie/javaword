@@ -27,6 +27,7 @@
         <module>secret</module>
         <module>stream-io</module>
         <module>basic-java</module>
+        <module>web-service</module>
     </modules>
     <packaging>pom</packaging>
 

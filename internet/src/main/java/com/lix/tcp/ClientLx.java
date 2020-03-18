@@ -25,6 +25,7 @@ public class ClientLx {
         DataOutputStream dos = new DataOutputStream(client.getOutputStream());
         String data = "hello";
         dos.writeUTF(data);
+
         dos.flush();
         dos.close();
     }

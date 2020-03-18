@@ -27,7 +27,7 @@
                     <archive>
                         <manifest>
                             <!--<mainClass>com.qdcz.platform.beeJava.WrapperStartMain</mainClass>-->
-                            <mainClass>com.lix.PathJava</mainClass>
+                            <mainClass>com.lix.LoadJava</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

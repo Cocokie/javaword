@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persons>
+    <person>
+        <name>lixin</name>
+        <age>18</age>
+        <description extra="zhe">haha</description>
+    </person>
+    <person>
+        <name>lover</name>
+        <age>16</age>
+        <description extra="zhe">mylover</description>
+    </person>
+</persons>

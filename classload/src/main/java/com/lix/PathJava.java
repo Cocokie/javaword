@@ -34,7 +34,7 @@ public class PathJava {
             System.out.println(annotation.annotationType());
             System.out.println(annotation);
         }
-        customize.getInfo();
+       // customize.getInfo();
     }
 
     private static void urlOpenStream() throws IOException {

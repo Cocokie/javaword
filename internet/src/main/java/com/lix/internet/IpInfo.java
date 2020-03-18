@@ -6,13 +6,13 @@ import java.net.UnknownHostException;
 public class IpInfo {
     public static void main(String[] args) throws UnknownHostException {
 
-        //getLocalInfo();
-       // getInfoByName();
-        getInfoByIp();
+        getLocalInfo();
+        //getInfoByName();
+        //getInfoByIp();
     }
 
     private static void getInfoByIp() throws UnknownHostException {
-        InetAddress addr = InetAddress.getByName("127.0.0.1");
+        InetAddress addr = InetAddress.getByName("59.110.14.7");
         // 返回sxt服务器的IP：59.110.14.7
         System.out.println(addr.getHostAddress());
         /*
@@ -23,7 +23,7 @@ public class IpInfo {
     }
 
     private static void getInfoByName() throws UnknownHostException {
-        InetAddress addr = InetAddress.getByName("www.sxt.cn");
+        InetAddress addr = InetAddress.getByName("www.hnwanz.com");
         // 返回 sxt服务器的IP:59.110.14.7
         System.out.println(addr.getHostAddress());
         // 输出：www.sxt.cn
