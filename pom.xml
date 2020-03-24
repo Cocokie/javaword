@@ -31,6 +31,7 @@
         <module>java8</module>
         <module>basic-java</module>
         <module>stream-io</module>
+        <module>basic-web</module>
     </modules>
     <packaging>pom</packaging>
 

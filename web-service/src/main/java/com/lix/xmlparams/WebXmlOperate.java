@@ -5,6 +5,7 @@ import com.lix.xmlcontainer.ServletClass;
 import com.lix.xmlcontainer.ServletMapping;
 import com.lix.xmlcontainer.WebApp;
 import com.lix.xmlcontainer.XmlInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -24,22 +25,20 @@ import java.util.Map;
  * @author: lixin
  * @create: 2020-03-18 17:00
  **/
-public class WebXmlOperate implements XmlParse {
-    private List<Map<String, Object>> xmlObjects;
+public class WebXmlOperate {
 
-    public static void main(String[] args) {
-        new WebXmlOperate().parseXml("myWeb.xml");
-    }
 
-    public List<Map<String, List<Object>>> parseXml(String resource) {
+    public static WebApp parseXml(String resource) {
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+        WebApp webApp = null;
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
             WebXmlParseHandler webXmlParseHandler = new WebXmlParseHandler();
             saxParser.parse(Thread.currentThread().getContextClassLoader().getResourceAsStream(resource), webXmlParseHandler);
-            WebApp webApp = webXmlParseHandler.getWebApp();
+             webApp = webXmlParseHandler.getWebApp();
             System.out.println(webApp);
             System.out.println("======解析完毕======");
+
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (SAXException e) {
@@ -47,11 +46,14 @@ public class WebXmlOperate implements XmlParse {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return webApp;
     }
 
-    public List<Map<String, Object>> getXmlObjects() {
-        return xmlObjects;
+    public static WebApp getWebApp(String resource) {
+        if (StringUtils.isBlank(resource)) {
+            return new WebApp();
+        }
+        return parseXml(resource);
     }
 }
 
@@ -60,22 +62,15 @@ class WebXmlParseHandler extends DefaultHandler {
     private ServletMapping servletMapping;
     private WebApp webApp;
     private String currentTag;
-    private XmlInfo currentClass;
-
     private List<ServletClass> servletClassList;
     private List<ServletMapping> servletMappingList;
-
     private List<String> urlPatterns;
 
     @Override
     public void startDocument() throws SAXException {
         System.out.println("开始解析webXml");
-
-
-        currentClass = new XmlInfo();
         servletClassList = new ArrayList<ServletClass>();
         servletMappingList = new ArrayList<ServletMapping>();
-
         webApp = new WebApp();
         urlPatterns = new ArrayList<String>();
 
@@ -85,15 +80,12 @@ class WebXmlParseHandler extends DefaultHandler {
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         System.out.println("开始解析元素");
-
         this.currentTag = qName;
         if (qName != null && qName.equals(XmlInfoConstant.SERVLET.getName())) {
             servletClass = new ServletClass();
-            currentClass = servletClass;
         } else if (qName != null && qName.equals(XmlInfoConstant.SERVLETMAPPING.getName())) {
             servletMapping = new ServletMapping();
             servletMapping.setUrlPatterns(urlPatterns);
-            currentClass = servletMapping;
         }
     }
 
@@ -101,10 +93,7 @@ class WebXmlParseHandler extends DefaultHandler {
     public void characters(char[] ch, int start, int length) throws SAXException {
         System.out.println("解析元素内容");
         String s = new String(ch, start, length).trim();
-
-
         if (servletClass != null && currentTag != null) {
-
             if (currentTag.equals(XmlInfoConstant.SERVLETNAME.getName())) {
                 servletClass.setServletName(s);
             } else if (currentTag.equals(XmlInfoConstant.SERVLETCLASS.getName())) {
@@ -129,9 +118,20 @@ class WebXmlParseHandler extends DefaultHandler {
             webApp.setServletMappings(servletMappingList);
         } else if (qName != null && qName.equals(XmlInfoConstant.SERVLET.getName())) {
             servletClassList.add(servletClass);
+            for (ServletMapping mapping : servletMappingList) {
+                if (mapping.getServletName().equals(servletClass.getServletName())) {
+                    servletClass.setUrlPatterns(mapping.getUrlPatterns());
+                }
+            }
             servletClass = null;
         } else if (qName != null && qName.equals(XmlInfoConstant.SERVLETMAPPING.getName())) {
             servletMappingList.add(servletMapping);
+            for (ServletClass servletClass : servletClassList) {
+                if (servletClass.getServletName().equals(servletMapping.getServletName())) {
+                    servletClass.setUrlPatterns(servletMapping.getUrlPatterns());
+                }
+            }
+            urlPatterns = new ArrayList<String>();
             servletMapping = null;
         }
         super.endElement(uri, localName, qName);
@@ -141,7 +141,6 @@ class WebXmlParseHandler extends DefaultHandler {
     @Override
     public void endDocument() throws SAXException {
         System.out.println("webXml解析完毕");
-
     }
 
     public WebApp getWebApp() {

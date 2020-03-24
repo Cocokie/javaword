@@ -15,7 +15,7 @@ import java.util.Properties;
 public class PathJava {
     public static void main(String[] args) throws Exception {
         //路径都是相对当前工程运行目录new File()
-        // pathFile();
+        //pathFile();
 
 
         //直接Class.getResource()要加"/"才能定位到 类路径下的文件资源，否则就是定位到当前包
@@ -26,15 +26,10 @@ public class PathJava {
         //url uri 的一些方法
         //urlOpenStream();
 
-        Class<Customize> aClass = (Class<Customize>) PathJava.class.getClassLoader().loadClass("com.lix.Customize");
-        Customize customize = aClass.newInstance();
-        Annotation[] annotations = aClass.getAnnotations();
-        System.out.println(annotations.length);
-        for (Annotation annotation : annotations) {
-            System.out.println(annotation.annotationType());
-            System.out.println(annotation);
-        }
-       // customize.getInfo();
+
+        // customize.getInfo();
+        File f = new File("123");
+        System.out.println(f.getAbsolutePath());
     }
 
     private static void urlOpenStream() throws IOException {

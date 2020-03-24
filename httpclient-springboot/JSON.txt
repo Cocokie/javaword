@@ -1,0 +1,175 @@
+{
+   "Data" : {
+    "Page1": [
+      {
+        "FRPDate": "2019-10-21 00:00:00",
+        "FPeriod": 9,
+        "FYear": 2019,
+        "FRemainAmountFor1": 0.0000,
+        "FRemainAmount1": 0.0000,
+        "FClassTypeID": 1000022,
+        "FSubSystemID": 0,
+        "FVoucherID": 73,
+        "FPrintCount": 0,
+        "FPayCondition": {
+          "FNumber": "",
+          "FName": ""
+        },
+        "FBillType": 992,
+        "FNumber": "Test20200323",
+        "FItemClassID": {
+          "FNumber": "001",
+          "FName": "客户"
+        },
+        "FPayType": 4,
+        "FDate": "2019-09-02 00:00:00",
+        "FCustomer": {
+          "FNumber": "003.01.002.00002",
+          "FName": "李艳梅-三湘"
+        },
+        "FFincDate": "2019-09-02 00:00:00",
+        "FRPBank": "",
+        "FExchangeRateType": {
+          "FNumber": "01",
+          "FName": "公司汇率"
+        },
+        "FBankAcct": "",
+        "FCurrencyID": {
+          "FNumber": "RMB",
+          "FName": "人民币"
+        },
+        "FBankAcctName": "",
+        "FExchangeRate": 1.0,
+        "FAccountID": {
+          "FNumber": "",
+          "FName": ""
+        },
+        "FAmountFor": 4.2000,
+        "FAmount": 4.2000,
+        "FInterestRate": 0.0,
+        "FContractNo": "",
+        "FExplanation": "",
+        "FBillID": 1076,
+        "FContractID": 0,
+        "FRP": 0,
+        "FAdjustAmount": 0.0000,
+        "FBillStatus": 1,
+        "FBillStatus1": 1,
+        "FAdjustExchangeRate": 1.0000000000,
+        "FStatus": 7,
+        "FSource": 0,
+        "FSourceID": 0,
+        "FObtainRateWay": 0,
+        "FEmployee": {
+          "FNumber": "111111",
+          "FName": "湖南省福宇科贸有限责任公司"
+        },
+        "FChecker": {
+          "FNumber": "财务主管",
+          "FName": "财务主管"
+        },
+        "FPreparer": {
+          "FNumber": "Administrator",
+          "FName": "Administrator"
+        },
+        "FDepartment": {
+          "FNumber": "11111",
+          "FName": "湖南省福宇科贸有限责任公司"
+        },
+        "FOrderAmountFor": 0,
+        "FTaskID": {
+          "FNumber": "",
+          "FName": ""
+        },
+        "FOrderID": {
+          "FNumber": "",
+          "FName": ""
+        },
+        "FResourceID": {
+          "FNumber": "",
+          "FName": ""
+        },
+        "FBudgetAmountFor": 0.0000000000
+      }
+    ],
+    "Page2": [
+      {
+        "FDate_2": "2019-10-21 00:00:00",
+        "FAmountFor_2": 4.2000000000,
+        "FRemainAmount": 0.0000000000,
+        "FRemainAmountFor": 0.0000000000,
+        "FOrgID": 70,
+        "FAmount_2": 4.2000000000,
+        "FRP_2": 0,
+        "FEntryID2": 1,
+        "FDetailID2": 59,
+        "FBillID2": 1076
+      }
+    ],
+    "Page3": [
+      {
+        "FBillNo_SRC": "",
+        "FEntryContractNo": "",
+        "famountFor_3": 4.2000,
+        "FID_SRC": 0,
+        "FAmount_3": 4.2000,
+        "FTaxRate": 0.0000000000,
+        "FTaxAmountFor": 0.0000,
+        "FTaxAmount": 0.0000,
+        "FAmountNoTaxFor": 4.2000,
+        "FAmountNoTax": 4.2000,
+        "FAmountFor_Commit": 4.2000,
+        "FRemainAmountFor3": 0.0000,
+        "FRemainAmountFor_SRC": 0.0000,
+        "FAmount_Commit": 4.2000,
+        "FRemainAmount3": 0.0000,
+        "FRemainAmount_SRC": 0.0000,
+        "FContractEntryID": 0,
+        "FPayApplyAmountFor": 0.0000,
+        "FPayApplyAmount": 0.0000,
+        "FCheckAmountFor": 4.2000,
+        "FCheckAmount": 4.2000,
+        "FRemainAmountForEntry": 0.0000,
+        "FRemainAmountEntry": 0.0000,
+        "FExpenseInfo": "",
+        "FLinkCheckAmountFor": 4.2000,
+        "FLinkCheckAmount": 4.2000,
+        "FInvoiceAmount": 0.0000,
+        "FInvLinkCheckAmount": 0.0000,
+        "FInvLinkCheckAmountFor": 0.0000,
+        "FInvoiceAmountFor": 0.0000,
+        "FFeeObjName": null,
+        "FEntryID3": 1,
+        "FDetailID3": 39,
+        "FBillID3": 1076,
+        "FClassID_SRC": {
+          "FNumber": "",
+          "FName": ""
+        },
+        "FEntryID_SRC": 0,
+        "FFeeObjName": null,
+        "FEntryID3": 1,
+        "FDetailID3": 39,
+        "FBillID3": 1076,
+        "FClassID_SRC": {
+          "FNumber": "",
+          "FName": ""
+        },
+        "FEntryID_SRC": 0,
+        "FFeeObjID": {
+          "FNumber": "",
+          "FName": ""
+        },
+        "FAPAcctID": {
+          "FNumber": "",
+          "FName": ""
+        }
+      }
+    ]
+  }
+}
+
+
+
+
+    
