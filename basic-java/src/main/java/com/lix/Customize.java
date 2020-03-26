@@ -26,11 +26,19 @@ class A {
 }
 
 public class Customize extends A {
-    Customize(){
-        super("B");
+
+    Customize() {
+        this("dsa");
         System.out.println("B");
     }
+
+    Customize(String i) {
+        super("B");
+        System.out.println("sd");
+    }
+
     public static void main(String[] args) {
         new Customize();
+        System.out.printf("%s", "sda");
     }
 }

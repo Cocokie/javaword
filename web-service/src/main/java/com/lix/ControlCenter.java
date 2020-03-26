@@ -4,9 +4,14 @@ import com.lix.xmlcontainer.ServletClass;
 import com.lix.xmlcontainer.WebApp;
 import com.lix.xmlparams.WebXmlOperate;
 
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -18,9 +23,24 @@ import java.util.stream.Collectors;
 public class ControlCenter {
 
 
-    public static void main(String[] args) {
-        WebApp webApp = WebXmlOperate.parseXml("myWeb.xml");
-        String clazz = webApp.getClazz("/lo");
-        System.out.println(clazz);
+    public static void main(String[] args) throws Exception {
+        System.out.println("----server----");
+        ServerSocket serverSocket = new ServerSocket(8888);
+        while(true) {
+            Socket server = serverSocket.accept();
+
+            System.out.println("一个客户端建立了连接");
+
+            DataInputStream dataInputStream = new DataInputStream(server.getInputStream());
+            System.out.println("处理中...");
+            String s = dataInputStream.readUTF();
+            System.out.println(s);
+            dataInputStream.close();
+            server.close();
+        }
+
+//        WebApp webApp = WebXmlOperate.parseXml("myWeb.xml");
+//        String clazz = webApp.getClazz("/lo");
+//        System.out.println(clazz);
     }
 }

@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
@@ -30,11 +31,13 @@ public class Customize {
 
     public static void main(String[] args) throws IOException {
         token = getToken();
+
 //        HttpGet httpGet1 = new HttpGet("http://192.168.1.115/K3API/Transfer/GetTemplate?token=848C6B7805C23B4A260BA124FB4EF77ABFB5E4920B78E01DD5171BDA7826C6A9B58380774FB690D4");
 //        HttpResponse execute1 = httpClient.execute(httpGet1);
 //        String result1 = EntityUtils.toString(execute1.getEntity());
         //add();
         String url = String.format("http://192.168.1.115/K3API/Bill1000022/GetList?Token=%s", token);
+        RequestConfig.custom().build();
         HttpPost httpPost = new HttpPost(url);
 
         String params = "{\"Data\":{\"FBillNo\":\"001\"}}";
