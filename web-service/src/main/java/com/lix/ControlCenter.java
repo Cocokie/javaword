@@ -1,5 +1,6 @@
 package com.lix;
 
+import com.lix.threadpool.SimpleThreadPool;
 import com.lix.xmlcontainer.ServletClass;
 import com.lix.xmlcontainer.WebApp;
 import com.lix.xmlparams.WebXmlOperate;
@@ -26,17 +27,11 @@ public class ControlCenter {
     public static void main(String[] args) throws Exception {
         System.out.println("----server----");
         ServerSocket serverSocket = new ServerSocket(8888);
-        while(true) {
+        SimpleThreadPool simpleThreadPool = new SimpleThreadPool();
+        while (true) {
             Socket server = serverSocket.accept();
-
             System.out.println("一个客户端建立了连接");
-
-            DataInputStream dataInputStream = new DataInputStream(server.getInputStream());
-            System.out.println("处理中...");
-            String s = dataInputStream.readUTF();
-            System.out.println(s);
-            dataInputStream.close();
-            server.close();
+            simpleThreadPool.submitTask(new ServerTask(server));
         }
 
 //        WebApp webApp = WebXmlOperate.parseXml("myWeb.xml");

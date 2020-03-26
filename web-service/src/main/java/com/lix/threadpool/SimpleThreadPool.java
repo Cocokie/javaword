@@ -56,7 +56,6 @@ public class SimpleThreadPool {
         synchronized (task) {
             task.add(runnable);
             task.notifyAll();
-
         }
     }
 
@@ -103,10 +102,10 @@ public class SimpleThreadPool {
                     while (task.isEmpty()) {
                         try {
                             this.cycleStatus = CycleStatus.BLOCK;
-                            System.out.println(Thread.currentThread().getName() + "  阻塞中");
+                           // System.out.println(Thread.currentThread().getName() + "  阻塞中");
                             task.wait();
                         } catch (InterruptedException e) {
-                            System.out.println(this.cycleStatus + "  激活了gg" + Thread.currentThread().getName());
+                           // System.out.println(this.cycleStatus + "  激活了gg" + Thread.currentThread().getName());
                             break OUT;
                         }
                     }

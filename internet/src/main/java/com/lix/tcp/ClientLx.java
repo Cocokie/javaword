@@ -20,13 +20,16 @@ import java.net.Socket;
  */
 public class ClientLx {
     public static void main(String[] args) throws Exception {
-        System.out.println("----client----");
-        Socket client = new Socket("localhost",8888);
-        DataOutputStream dos = new DataOutputStream(client.getOutputStream());
-        String data = "hello";
-        dos.writeUTF(data);
+        for (int i = 0; i < 10; i++) {
 
-        dos.flush();
-        dos.close();
+            System.out.println("----client----");
+            Socket client = new Socket("localhost", 8888);
+            DataOutputStream dos = new DataOutputStream(client.getOutputStream());
+            String data = "hello";
+            dos.writeUTF(data);
+
+            dos.flush();
+            dos.close();
+        }
     }
 }
