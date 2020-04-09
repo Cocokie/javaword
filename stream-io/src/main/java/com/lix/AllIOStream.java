@@ -16,11 +16,18 @@ public class AllIOStream {
     public static void main(String[] args) throws Exception {
 
         //printStream();
-        objectStream();
+        //objectStream();
         //dataStream();
         //bufferedReaderWriter();
         //streamWriterReader();
         //ByteArrayDemo();
+        FileInputStream fileInputStream = new FileInputStream("stream-io/test.txt");
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+        BufferedReader bufferedReader2 = new BufferedReader(new FileReader("da"));
+        String line;
+        while((line =bufferedReader.readLine())!=null){
+            System.out.println(line);
+        }
     }
 
     private static void printStream() throws IOException {

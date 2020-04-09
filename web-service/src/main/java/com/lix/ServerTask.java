@@ -18,8 +18,21 @@ public class ServerTask implements Runnable {
             InputStream inputStream = server.getInputStream();
             //System.out.println(inputStream);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            String s = bufferedReader.readLine();
-            System.out.println("第一行:" + s);
+            int line = -1;
+            char []buf = new char[100];
+            StringBuffer stringBuffer = new StringBuffer();
+            System.out.println("开始读取");
+          CharArrayWriter charArrayWriter  = new CharArrayWriter();
+            while ((line = bufferedReader.read(buf)) != -1) {
+                String s = new String(buf, 0, buf.length);
+                System.out.println(s);
+                charArrayWriter.write(buf,0,buf.length);
+                charArrayWriter.flush();
+              //  stringBuffer.append(s);
+            }
+            System.out.println(charArrayWriter.toString());
+            System.out.println("====================");
+           // System.out.println(stringBuffer.toString());
             bufferedReader.close();
             server.close();
         } catch (IOException e) {
