@@ -33,6 +33,7 @@ public class ControlCenter {
             Socket server = serverSocket.accept();
             System.out.println("一个客户端建立了连接");
             simpleThreadPool.submitTask(new ServerTask(server));
+          // new Thread(new ServerTask(server)).start();
         }
 
 //        WebApp webApp = WebXmlOperate.parseXml("myWeb.xml");

@@ -1,5 +1,7 @@
 package com.lix;
 
+import java.io.*;
+
 /**
  * @program: javaworld
  * @description:
@@ -37,8 +39,11 @@ public class Customize extends A {
         System.out.println("sd");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         new Customize();
         System.out.printf("%s", "sda");
+        System.out.println(FileDescriptor.out);
+
+        PrintStream out = System.out;
     }
 }
