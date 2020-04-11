@@ -18,7 +18,10 @@ public class Customize {
                 new Dish("bbb", 861),
                 new Dish("ccc", 1543)
         );
-       // getDishNamesByCollections(menu);//查找能量低于500的食物的名字，并且排序,通过传统方式
+        System.out.println(menu);
+        menu = menu.stream().filter(s-> !(s.getEnergy()==321)).collect(Collectors.toList());
+        System.out.println(menu);
+        // getDishNamesByCollections(menu);//查找能量低于500的食物的名字，并且排序,通过传统方式
         //getDishNamesByStream(menu);//查找能量低于500的食物的名字，并且排序，通过Stream
     }
 

@@ -30,6 +30,7 @@ public class PathJava {
         // customize.getInfo();
         File f = new File("123");
         System.out.println(f.getAbsolutePath());
+        System.out.println(f);
     }
 
     private static void urlOpenStream() throws IOException {

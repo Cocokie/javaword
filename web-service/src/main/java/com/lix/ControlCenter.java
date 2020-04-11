@@ -26,7 +26,8 @@ public class ControlCenter {
 
     public static void main(String[] args) throws Exception {
         System.out.println("----server----");
-        ServerSocket serverSocket = new ServerSocket(8888);
+        ServerSocket serverSocket = new ServerSocket(8889);
+
         SimpleThreadPool simpleThreadPool = new SimpleThreadPool();
         while (true) {
             Socket server = serverSocket.accept();

@@ -7,9 +7,7 @@ package com.lix.tcp;
  * @create: 2020-02-27 17:52
  **/
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.Socket;
 
 /**
@@ -20,16 +18,25 @@ import java.net.Socket;
  */
 public class ClientLx {
     public static void main(String[] args) throws Exception {
-        for (int i = 0; i < 10; i++) {
-
+        for (int i = 0; i < 1; i++) {
             System.out.println("----client----");
-            Socket client = new Socket("localhost", 8888);
+            Socket client = new Socket("localhost", 8889);
             DataOutputStream dos = new DataOutputStream(client.getOutputStream());
+            InputStream inputStream = client.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String data = "hello";
             dos.writeUTF(data);
-
             dos.flush();
+            client.shutdownOutput();
+
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                System.out.println("s");
+                System.out.println(line);
+            }
             dos.close();
+            bufferedReader.close();
+            // dos.close();
         }
     }
 }
