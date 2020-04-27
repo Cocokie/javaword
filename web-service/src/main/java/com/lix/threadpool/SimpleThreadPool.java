@@ -60,7 +60,7 @@ public class SimpleThreadPool {
     }
 
     public void shutDown() {
-        this.thread.forEach(thread1 -> {
+        thread.forEach(thread1 -> {
             while (thread1.cycleStatus.equals(CycleStatus.RUNNING)) {
                 try {
                     Thread.sleep(20);

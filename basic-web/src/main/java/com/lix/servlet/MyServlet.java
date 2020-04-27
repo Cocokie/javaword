@@ -6,22 +6,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * @program: javaworld
- * @description: servlet
- * @author: lixin
- * @create: 2020-03-19 16:50
- **/
 public class MyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("哈哈ha1");
-        resp.getWriter().println("sad");
-        super.doGet(req, resp);
+
+//        System.out.println("你是神魔恋");
+//        resp.getWriter().println("qq");
+//        ServletConfig servletConfig = getServletConfig();
+//
+//        System.out.println("============");
+//        System.out.println(servletConfig.getInitParameter("name"));
+//        System.out.println(servletConfig.getServletName());
+//        ServletContext servletContext = servletConfig.getServletContext();
+//        System.out.println(servletContext.getInitParameter("name"));
+        System.out.println("servlet");
+        //  System.out.println(servletContext.getAttribute("name"));
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        doGet(req, resp);
     }
 }

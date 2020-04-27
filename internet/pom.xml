@@ -23,7 +23,7 @@
                     <archive>
                         <manifest>
                             <!--<mainClass>com.qdcz.platform.beeJava.WrapperStartMain</mainClass>-->
-                            <mainClass>com.lix.FileServerUDP</mainClass>
+                            <mainClass>com.lix.tcp.uploadFile.ServerUploadFile</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -36,6 +36,22 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>7</source>
+                    <target>7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -1,18 +1,21 @@
 package com.lix;
 
-import java.io.*;
-import java.util.Scanner;
+import com.alibaba.fastjson.JSON;
+
+import javax.lang.model.element.NestingKind;
+import java.io.DataOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * @author 12547
  */
 public class CustomizeMain {
     public static void main(String[] args) throws IOException {
-//        InputStream in = System.in;
-//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream("hahah".getBytes());
-        Scanner s = new Scanner(byteArrayInputStream);
-        System.out.println(s.next());
-       // System.out.println(br.readLine());
+        String a = null;
+        String c = null;
+        String b = null;
+
+        System.out.println(a.concat(b) );
     }
 }

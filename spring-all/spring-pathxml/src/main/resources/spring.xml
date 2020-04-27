@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="user" class="com.lix.domain.User">
+        <property name="age" value="16"></property>
+        <property name="name" value="lx"></property>
+    </bean>
+
+
+    <bean id="userController" class="com.lix.controller.UserController">
+        <property name="userService" ref="userService"></property>
+        <property name="name" value="李昕"></property>
+        <property name="names">
+            <list>
+                <value>haha</value>
+                <value>八稚女</value>
+            </list>
+        </property>
+        <property name="users">
+            <list>
+                <ref bean="user"></ref>
+            </list>
+        </property>
+        <property name="stringMap">
+            <props>
+                <prop key="lol">英雄联盟</prop>
+                <prop key="xxx">艾欧尼亚</prop>
+            </props>
+        </property>
+        <property name="objMap">
+            <map>
+                <entry key="kof" value="拳皇"></entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="userService" class="com.lix.service.UserService"></bean>
+</beans>

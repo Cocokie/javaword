@@ -32,6 +32,8 @@
         <module>basic-java</module>
         <module>stream-io</module>
         <module>basic-web</module>
+        <module>spring-all</module>
+        <module>mybatis</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -52,11 +54,8 @@
         </dependencies>
     </dependencyManagement>
 
+
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

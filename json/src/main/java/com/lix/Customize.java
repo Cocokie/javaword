@@ -7,9 +7,11 @@ import com.alibaba.fastjson.TypeReference;
 import com.lix.domain.Address;
 import com.lix.domain.Info;
 import com.lix.domain.User;
+import sun.misc.Contended;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Customize {
     public static void main(String[] args) {

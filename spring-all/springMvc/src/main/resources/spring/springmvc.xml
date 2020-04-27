@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--    处理器适配器1,所有处理器都实现HandlerAdapter-->
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"></bean>
+    <!--    处理器适配器2,处理器实现-->
+    <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"></bean>
+    <!--    注入controller-->
+    <bean id="userController" name="/haha" class="com.lix.springmvc.controller.UserController"></bean>
+    <bean id="userController1" class="com.lix.springmvc.controller.UserController2"></bean>
+
+    <!--    处理器映射器1-->
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"></bean>
+    <!--    处理器映射器2-->
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/get">userController1</prop>
+                <prop key="/get2">userController1</prop>
+            </props>
+        </property>
+    </bean>
+    <!--    视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"></bean>
+
+
+</beans>
