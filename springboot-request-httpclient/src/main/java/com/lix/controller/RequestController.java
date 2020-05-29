@@ -25,6 +25,7 @@ public class RequestController {
 
     @PostMapping("postForm")
     public String postForm(@RequestParam List<String> userIds) {
+        System.out.println(userIds);
         return "success";
     }
 

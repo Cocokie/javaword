@@ -11,9 +11,6 @@ import java.util.List;
  **/
 public class Customize2 {
     public static void main(String[] args) {
-        String haha = "dasdas\n";
-        System.out.print(haha);
-        String x = "xxx";
-        System.out.println(x);
+
     }
 }

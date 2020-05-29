@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class ServerLx {
     public static void main(String[] args) throws Exception {
         System.out.println("----server----");
-        ServerSocket serverSocket = new ServerSocket(10000);
+        ServerSocket serverSocket = new ServerSocket(13000);
         while (true) {
             Socket server = serverSocket.accept();
 
@@ -47,8 +47,9 @@ public class ServerLx {
         public void run() {
             while (true) {
                 try {
-                    Object receive = receive();
-                    send(receive + "   已经接收");
+                    Object receive = receive2();
+                    //send2(receive + "   已经接收");
+                    //socketServer.shutdownOutput();
                     // close();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -87,8 +88,9 @@ public class ServerLx {
             String line = null;
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             System.out.println("读取中");
+            StringBuffer result = new StringBuffer();
             while ((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
+                result.append(line);
             }
             System.out.println("===============over==============");
 

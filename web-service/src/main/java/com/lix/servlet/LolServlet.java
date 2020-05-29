@@ -9,6 +9,7 @@ package com.lix.servlet;
 public class LolServlet extends BaseServlet {
 
 
+    @Override
     public void doService() {
         System.out.println("LolServlet");
     }

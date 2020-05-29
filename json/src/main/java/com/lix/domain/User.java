@@ -2,7 +2,6 @@ package com.lix.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.elasticsearch.cluster.metadata.AliasAction;
 
 import java.util.List;
 

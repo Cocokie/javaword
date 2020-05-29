@@ -27,7 +27,6 @@ public class ServerTask implements Runnable {
             bufferedOutputStream.write("over".getBytes());
             bufferedOutputStream.flush();
 
-
             server.shutdownOutput();
             bufferedReader.close();
             bufferedOutputStream.close();

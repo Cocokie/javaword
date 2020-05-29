@@ -8,6 +8,7 @@ package com.lix.servlet;
  **/
 public class PopServlet extends BaseServlet {
 
+    @Override
     public void doService() {
         System.out.println("PopServlet");
     }

@@ -1,4 +1,4 @@
-package com.lix.domain;
+package com.lix.mybatis.domain;
 
 
 import lombok.Data;

@@ -5,53 +5,26 @@ import com.lix.domain.Dish;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Customize {
-    public static void main(String[] args) throws FileNotFoundException {
-        List<Dish> menu = Arrays.asList(
-                new Dish("pork", 200),
-                new Dish("xxx", 122),
-                new Dish("aaa", 321),
-                new Dish("bbb", 861),
-                new Dish("ccc", 1543)
-        );
-        System.out.println(menu);
-        menu = menu.stream().filter(s-> s.getEnergy()!=321).collect(Collectors.toList());
-        System.out.println(menu);
-        // getDishNamesByCollections(menu);//查找能量低于500的食物的名字，并且排序,通过传统方式
-        //getDishNamesByStream(menu);//查找能量低于500的食物的名字，并且排序，通过Stream
-    }
+    public static void main(String[] args) throws Exception {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date parse = simpleDateFormat.parse("2020-05-02 00:00:00");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(parse);
 
-    public static void getDishNamesByStream(List<Dish> menu) {
-        Stream<Dish> stream = menu.stream();
-        System.out.println(stream);
+        for (int i = 1; i <= 26; i++) {
 
-        List<String> collect = menu.stream().filter(d -> d.getEnergy() < 400)
-                .sorted((d1, d2) -> d1.getEnergy().compareTo(d2.getEnergy()))
-                .map(dish -> dish.getName())
-                .collect(Collectors.toList());
-        collect.stream().forEach(x -> System.out.println(x));
-    }
-
-    public static void getDishNamesByCollections(List<Dish> menu) {
-        menu.sort((d1, d2) -> d1.getEnergy().compareTo(d2.getEnergy()));
-        for (Dish dish : menu) {
-            System.out.println(dish);
+            System.out.println(simpleDateFormat.format(cal.getTime()));
+            cal.add(Calendar.DAY_OF_MONTH, +1);
         }
-        List<String> emptyList = new ArrayList<>();
-        for (Dish dish : menu) {
-            if (dish.getEnergy() < 400) {
-                emptyList.add(dish.getName());
-            }
-        }
-        for (String s : emptyList) {
-            System.out.println(s);
-        }
+
+
+
     }
 
-    public  void getDishNamesByStream() {
-    }
 }

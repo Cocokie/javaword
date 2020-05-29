@@ -21,16 +21,16 @@ public class ClientLx {
     public static void main(String[] args) throws Exception {
         System.out.println("----client----");
         boolean isRunning =true;
-        Socket client = new Socket("localhost", 10000);
+        Socket client = new Socket("localhost", 8889);
         OutputStream outputStream = client.getOutputStream();
         InputStream inputStream = client.getInputStream();
         BufferedReader readerKey = new BufferedReader(new InputStreamReader(System.in));
 
         while (isRunning) {
             String data = readerKey.readLine();
-            dataOutputStreamRead(outputStream, data);
-            //client.shutdownOutput();
-            dataInputStreamRead(inputStream);
+            outPutStreamRead(outputStream, data);
+            client.shutdownOutput();
+            InputStreamRead(inputStream);
         }
         outputStream.close();
         inputStream.close();
@@ -69,5 +69,10 @@ public class ClientLx {
         while ((k = bufferedInputStream.read(b)) != -1) {
             System.out.println(new String(b, 0, k));
         }
+    }
+    private static void outPutStreamRead(OutputStream outputStream,String data) throws IOException {
+        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream);
+        bufferedOutputStream.write(data.getBytes());
+        bufferedOutputStream.flush();
     }
 }

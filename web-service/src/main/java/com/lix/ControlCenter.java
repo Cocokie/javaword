@@ -35,7 +35,6 @@ public class ControlCenter {
             simpleThreadPool.submitTask(new ServerTask(server));
           // new Thread(new ServerTask(server)).start();
         }
-
 //        WebApp webApp = WebXmlOperate.parseXml("myWeb.xml");
 //        String clazz = webApp.getClazz("/lo");
 //        System.out.println(clazz);
