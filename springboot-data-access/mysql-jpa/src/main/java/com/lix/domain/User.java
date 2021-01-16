@@ -13,5 +13,6 @@ import javax.persistence.Table;
 public class User {
     @Id
     private String username;
+
     private Double amount;
 }

@@ -7,8 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.List;
 
 public class Mapper_Main {
@@ -22,7 +21,7 @@ public class Mapper_Main {
         List<User> users = mapper.getUsers();
         System.out.println(users);
 
-        System.out.println("=-==================");
+        System.out.println("===================");
         //SqlSession sqlSession1 = sqlSessionFactory.openSession();
         UserMapper mapper1 = sqlSession.getMapper(UserMapper.class);
         User users1 = mapper1.getUserById("1");

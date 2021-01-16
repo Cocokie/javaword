@@ -12,7 +12,8 @@ public class UserController {
     private UserService userService;
     @GetMapping("get")
     public String transfer(String username,Double amount){
-        userService.transfer(username,amount);
+        //userService.transfer(username,amount);
+        userService.queryById(1);
         return "xxx";
     }
 }

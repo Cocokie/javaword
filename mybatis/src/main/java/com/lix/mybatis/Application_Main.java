@@ -16,7 +16,14 @@ public class Application_Main {
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        List<User> objects = sqlSession.selectList("com.lix.mybatis.mapper.UserMapper.getUsers",new Object());
-        System.out.println(objects);
+
+        User u = new User();
+        u.setId(1);
+        u.setAccount(2);
+        //u.setUsername("lixin");
+        //u.setAge(16);
+        int update = sqlSession.update("basicUser.updateUserById", u);
+        sqlSession.commit();
+        System.out.println(update);
     }
 }

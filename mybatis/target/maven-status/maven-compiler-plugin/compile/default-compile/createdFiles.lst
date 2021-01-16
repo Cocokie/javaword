@@ -1,0 +1,7 @@
+com\lix\mybatis\Application_Main.class
+com\lix\mybatis\Mapper_Main.class
+com\lix\mybatis\dao\UserDao.class
+com\lix\mybatis\domain\User.class
+com\lix\mybatis\service\UserService.class
+com\lix\mybatis\controller\UserController.class
+com\lix\mybatis\mapper\UserMapper.class

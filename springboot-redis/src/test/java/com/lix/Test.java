@@ -21,6 +21,7 @@ public class Test {
     JedisConnectionFactory jedisConnectionFactory;
     @org.junit.jupiter.api.Test
     public void test() {
+
         redisString();
         //redisList();
         //setRedis();

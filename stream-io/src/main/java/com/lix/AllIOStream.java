@@ -23,7 +23,7 @@ public class AllIOStream {
         //ByteArrayDemo();
         FileInputStream fileInputStream = new FileInputStream("stream-io/test.txt");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
-        BufferedReader bufferedReader2 = new BufferedReader(new FileReader("da"));
+       // BufferedReader bufferedReader2 = new BufferedReader(new FileReader("da"));
         String line;
         while((line =bufferedReader.readLine())!=null){
             System.out.println(line);

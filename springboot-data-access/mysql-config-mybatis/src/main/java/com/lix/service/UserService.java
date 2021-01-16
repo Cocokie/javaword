@@ -19,4 +19,9 @@ public class UserService {
         }
 
     }
+
+    public void queryById(int i) {
+        User user = userMapper.queryById(i,2);
+        System.out.println(user);
+    }
 }

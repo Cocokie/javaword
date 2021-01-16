@@ -11,15 +11,15 @@ public class StreamFilter {
                 .sorted(Comparator.comparingInt(i -> i))
                 .collect(Collectors.toList());
         System.out.println(collect);
-        //去重
-        List<Integer> collect1 = list.stream().distinct().collect(Collectors.toList());
-        System.out.println(collect1);
-        //取值跳过几个 取后面
-        List<Integer> collect2 = list.stream().skip(3).collect(Collectors.toList());
-        System.out.println(collect2);
-
-        //取值前面
-        List<Integer> collect3 = list.stream().limit(3).collect(Collectors.toList());
-        System.out.println(collect3);
+//        //去重
+//        List<Integer> collect1 = list.stream().distinct().collect(Collectors.toList());
+//        System.out.println(collect1);
+//        //取值跳过几个 取后面
+//        List<Integer> collect2 = list.stream().skip(3).collect(Collectors.toList());
+//        System.out.println(collect2);
+//
+//        //取值前面
+//        List<Integer> collect3 = list.stream().limit(3).collect(Collectors.toList());
+//        System.out.println(collect3);
     }
 }
