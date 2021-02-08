@@ -14,20 +14,34 @@ import java.util.Scanner;
  **/
 public class AllIOStream {
     public static void main(String[] args) throws Exception {
-
+        copyImages();
         //printStream();
         //objectStream();
         //dataStream();
         //bufferedReaderWriter();
         //streamWriterReader();
         //ByteArrayDemo();
-        FileInputStream fileInputStream = new FileInputStream("stream-io/test.txt");
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+//        FileInputStream fileInputStream = new FileInputStream("stream-io/test.txt");
+//        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
        // BufferedReader bufferedReader2 = new BufferedReader(new FileReader("da"));
-        String line;
-        while((line =bufferedReader.readLine())!=null){
-            System.out.println(line);
+//        String line;
+//        while((line =bufferedReader.readLine())!=null){
+//            System.out.println(line);
+//        }
+    }
+    private static void copyImages() throws IOException {
+        try (InputStream fileInputStream = new BufferedInputStream(new FileInputStream("stream-io/kitop-control-1.0.0-SNAPSHOT.jar"));
+             OutputStream fileOutputStream =new BufferedOutputStream( new FileOutputStream("stream-io/2.jar")))
+        {
+            byte[] b = new byte[1 * 2048];
+            int k;
+            while ((k = fileInputStream.read(b)) != -1) {
+                fileOutputStream.write(b, 0, k);
+            }
+            fileInputStream.close();
+            fileOutputStream.close();
         }
+
     }
 
     private static void printStream() throws IOException {

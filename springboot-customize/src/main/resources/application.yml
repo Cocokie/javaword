@@ -1,0 +1,16 @@
+server:
+  port: 10002
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/customize?useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&useTimezone=true&serverTimezone=GMT%2B8
+#    username: root
+#    password: root
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    password: KitOp1@2!
+    url: jdbc:mysql://192.168.0.240:3306/kitop_management?useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&useTimezone=true&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
+    username: user2
+mybatis:
+  mapper-locations: mapper/**

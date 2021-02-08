@@ -7,4 +7,5 @@ import lombok.Data;
 public class User {
     private String username;
     private Double amount;
+    String time;
 }

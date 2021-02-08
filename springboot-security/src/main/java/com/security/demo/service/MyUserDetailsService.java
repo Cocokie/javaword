@@ -6,6 +6,7 @@ import com.security.demo.domain.Users;
 import com.security.demo.mapper.MyUsersMapper;
 import com.security.demo.mapper.UsersMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,6 +27,7 @@ public class MyUserDetailsService implements UserDetailsService {
      MyUsersMapper myUsersMapper;
 
     @Override
+    @PreAuthorize
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         QueryWrapper<MyUsers> wrapper = new QueryWrapper();
         wrapper.eq("username",s);

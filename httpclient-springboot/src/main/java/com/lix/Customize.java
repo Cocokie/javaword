@@ -2,6 +2,7 @@ package com.lix;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -14,10 +15,13 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @program: javaworld
@@ -27,57 +31,82 @@ import java.io.IOException;
  **/
 public class Customize {
     static HttpClient httpClient = HttpClients.createDefault();
-    static String token;
 
     public static void main(String[] args) throws IOException {
-        token = getToken();
-
-//        HttpGet httpGet1 = new HttpGet("http://192.168.1.115/K3API/Transfer/GetTemplate?token=848C6B7805C23B4A260BA124FB4EF77ABFB5E4920B78E01DD5171BDA7826C6A9B58380774FB690D4");
-//        HttpResponse execute1 = httpClient.execute(httpGet1);
-//        String result1 = EntityUtils.toString(execute1.getEntity());
-        //add();
-        String url = String.format("http://192.168.1.115/K3API/Bill1000022/GetList?Token=%s", token);
-        RequestConfig.custom().build();
-        HttpPost httpPost = new HttpPost(url);
-
-        String params = "{\"Data\":{\"FBillNo\":\"001\"}}";
-        StringEntity entity = new StringEntity(params, ContentType.APPLICATION_JSON);
-        httpPost.setEntity(entity);
-        HttpResponse execute = httpClient.execute(httpPost);
-        String result = EntityUtils.toString(execute.getEntity());
-        System.out.println(result);
-    }
-
-    private static void add() throws IOException {
-        String url = String.format("http://192.168.1.115/K3API/Bill1000022/Save?Token=%s", token);
-        System.out.println(url);
-        HttpPost httpPost = new HttpPost(url);
-        FileInputStream fileInputStream = new FileInputStream("httpclient-springboot/JSON.txt");
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        byte[] k = new byte[1024 * 5];
-        int i = -1;
-        while ((i = fileInputStream.read(k)) != -1) {
-            byteArrayOutputStream.write(k, 0, i);
-        }
-        byte[] bytes = byteArrayOutputStream.toByteArray();
-        String params = new String(bytes, "gbk");
-        // System.out.println(new String(bytes,"gbk"))
-        StringEntity entity = new StringEntity(params, ContentType.APPLICATION_JSON);
-        httpPost.setEntity(entity);
-        HttpResponse execute = httpClient.execute(httpPost);
-        String result = EntityUtils.toString(execute.getEntity());
-        System.out.println(result);
-    }
-
-    private static String getToken() throws IOException {
-        HttpGet httpGet = new HttpGet("http://192.168.1.115/K3API/Token/Create?authorityCode=0444f090b434186bc21c041f6363064db85c31ebdd0676cd");
+        String url = "http://cctvalih5ca.v.myalicdn.com/live/cctv1_2/index.m3u8";
+        //String url ="http://cctvalih5ca.v.myalicdn.com/live/cctv1_2/cctv1_2md/1612423141_6120448.ts";
+        String prex = url.substring(0, url.lastIndexOf("/") + 1);
+        HttpGet httpGet = new HttpGet(url);
+        httpGet.setHeader("Content-Type", "application/vnd.apple.mpegurl");
         HttpResponse execute = httpClient.execute(httpGet);
-        String s = EntityUtils.toString(execute.getEntity());
-        JSONObject object = JSON.parseObject(s);
-        if (200 == object.getInteger("StatusCode")) {
-            JSONObject data = object.getJSONObject("Data");
-            return (String) data.get("Token");
+        HttpEntity entity = execute.getEntity();
+        InputStream content = entity.getContent();
+        List<Header> headers = Arrays.asList(execute.getAllHeaders());
+//        headers.forEach(header->{
+//            System.out.println(header.getName()+": "+header.getValue());
+//        });
+        TreeMap<Integer,String> treeMap = new TreeMap<>();
+        String sd;
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(content));
+        double x = 0;
+        Pattern compile = Pattern.compile("^#.+:(),$");
+        String contentString = "";
+        int i=1;
+        try {
+            while ((sd = bufferedReader.readLine()) != null) {
+                //System.out.println(sd);
+                contentString += sd + "\n";
+                if (sd.startsWith("#EXTINF")) {
+                    Matcher matcher = compile.matcher(sd);
+                    while (matcher.find()) {
+                        String group = matcher.group(1);
+                        x = Double.parseDouble(group) + x;
+                    }
+                }
+                if (sd.endsWith(".ts")) {
+                    treeMap.put(i++,prex + sd);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            bufferedReader.close();
         }
-        return "";
+        //System.out.println(linkedHashSet);
+        System.out.println("over");
+        ArrayList errorList = new ArrayList<String>();
+        TreeMap<Integer, byte []> byteTreeMap = new TreeMap();
+        System.out.println(treeMap);
+        ExecutorService executorService = Executors.newFixedThreadPool(8);
+        Set<Map.Entry<Integer, String>> entries = treeMap.entrySet();
+
+        entries.forEach(urlMap->{
+            executorService.submit(new DownLoadRunnable(urlMap,errorList,byteTreeMap,httpClient));
+
+        });
+        executorService.shutdown();
+        try {
+            executorService.awaitTermination(1, TimeUnit.HOURS); // 或者更长时间
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(byteTreeMap.size());
+        //ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        FileOutputStream fileOutputStream = new FileOutputStream("E:\\git-source\\javaworld\\httpclient-springboot\\cctv.mp4");
+        Iterator<Map.Entry<Integer, byte[]>> iterator = byteTreeMap.entrySet().iterator();
+        while(iterator.hasNext()){
+            Map.Entry<Integer, byte[]> next = iterator.next();
+            byte[] value = next.getValue();
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(value);
+            byte []a= new byte[1024];
+            int l=0;
+            while((l=byteArrayInputStream.read(a))!=-1){
+                fileOutputStream.write(a,0,l);
+            }
+        }
+
+        System.out.println(errorList.size());
     }
+
+
 }

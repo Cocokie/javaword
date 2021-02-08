@@ -19,4 +19,8 @@ public class UserService {
         }
 
     }
+
+    public  List<User> time() {
+        return userMapper.queryAll();
+    }
 }
