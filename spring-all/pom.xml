@@ -18,7 +18,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <spring-webmvc.version>5.2.4.RELEASE</spring-webmvc.version>
+        <spring-webmvc.version>5.2.20.RELEASE</spring-webmvc.version>
     </properties>
     <dependencies>
         <dependency>
